@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="LpmsAndroidTest">
+    <property environment="env"/>
+    <property name="junit.output.dir" value="junit"/>
+    <property name="android_lpms_app.location" value="../android_lpms_app"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+    <path id="Android Private Libraries.libraryclasspath"/>
+    <path id="Android Dependencies.libraryclasspath"/>
+    <path id="Android 4.4.2.libraryclasspath">
+        <pathelement location="../../../Desktop/adt-bundle-mac-x86_64-20130717/sdk/platforms/android-19/android.jar"/>
+    </path>
+    <path id="Android 4.3.libraryclasspath">
+        <pathelement location="../../../Desktop/adt-bundle-mac-x86_64-20130717/sdk/platforms/android-18/android.jar"/>
+    </path>
+    <path id="android_lpms_app.classpath">
+        <path refid="Android 4.3.libraryclasspath"/>
+        <path refid="Android Dependencies.libraryclasspath"/>
+        <pathelement location="${android_lpms_app.location}/libs/umeng_sdk.jar"/>
+        <pathelement location="${android_lpms_app.location}/libs/umpay_sdk.jar"/>
+        <pathelement location="${android_lpms_app.location}/libs/libammsdk.jar"/>
+        <pathelement location="${android_lpms_app.location}/libs/nineoldandroids-2.4.0.jar"/>
+        <pathelement location="${android_lpms_app.location}/libs/Events.jar"/>
+        <pathelement location="${android_lpms_app.location}/libs/android-support-v4.jar"/>
+        <pathelement location="${android_lpms_app.location}/libs/pushservice-2.4.0.jar"/>
+        <path refid="Android Private Libraries.libraryclasspath"/>
+        <pathelement location="${android_lpms_app.location}/libs/weibosdkcore.jar"/>
+        <pathelement location="${android_lpms_app.location}/bin/classes"/>
+    </path>
+    <path id="LpmsAndroidTest.classpath">
+        <pathelement location="bin/classes"/>
+        <path refid="Android Private Libraries.libraryclasspath"/>
+        <path refid="Android Dependencies.libraryclasspath"/>
+        <pathelement location="lib/robotium-solo-5.2.1.jar"/>
+        <path refid="Android 4.4.2.libraryclasspath"/>
+        <path refid="android_lpms_app.classpath"/>
+    </path>
+    <path id="run.AnnotationTest.classpath">
+        <path refid="LpmsAndroidTest.classpath"/>
+    </path>
+    <path id="run.AnnotationTest.bootclasspath"/>
+    <path id="run.Generator (1).classpath">
+        <path refid="Android 4.4.2.libraryclasspath"/>
+        <path refid="LpmsAndroidTest.classpath"/>
+    </path>
+    <path id="run.Generator (1).bootclasspath"/>
+    <path id="run.LoginSuite (3).classpath">
+        <path refid="LpmsAndroidTest.classpath"/>
+    </path>
+    <path id="run.LoginSuite (3).bootclasspath"/>
+    <path id="run.MainSuite (1).classpath">
+        <path refid="LpmsAndroidTest.classpath"/>
+    </path>
+    <path id="run.MainSuite (1).bootclasspath"/>
+    <path id="run.MyTest.classpath">
+        <path refid="LpmsAndroidTest.classpath"/>
+    </path>
+    <path id="run.MyTest.bootclasspath"/>
+    <path id="run.RandomControl.classpath">
+        <path refid="LpmsAndroidTest.classpath"/>
+    </path>
+    <path id="run.RandomControl.bootclasspath"/>
+    <target name="init">
+        <mkdir dir="bin/classes"/>
+        <copy includeemptydirs="false" todir="bin/classes">
+            <fileset dir="src">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="bin/classes">
+            <fileset dir="gen">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin/classes"/>
+    </target>
+    <target depends="clean" name="cleanall">
+        <ant antfile="build.xml" dir="${android_lpms_app.location}" inheritAll="false" target="clean"/>
+    </target>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects">
+        <ant antfile="build.xml" dir="${android_lpms_app.location}" inheritAll="false" target="build-project">
+            <propertyset>
+                <propertyref name="build.compiler"/>
+            </propertyset>
+        </ant>
+    </target>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin/classes" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <src path="gen"/>
+            <classpath refid="LpmsAndroidTest.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target name="AnnotationTest">
+        <java classname="com.liepin.driver.annotation.AnnotationTest" failonerror="true" fork="yes">
+            <classpath refid="run.AnnotationTest.classpath"/>
+            <bootclasspath>
+                <path refid="run.AnnotationTest.bootclasspath"/>
+            </bootclasspath>
+        </java>
+    </target>
+    <target name="Generator (1)">
+        <java classname="com.liepin.utils.Generator" failonerror="true" fork="yes">
+            <classpath refid="run.Generator (1).classpath"/>
+            <bootclasspath>
+                <path refid="run.Generator (1).bootclasspath"/>
+            </bootclasspath>
+        </java>
+    </target>
+    <target name="LoginSuite (3)">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.liepin.mishu.suite.LoginSuite" todir="${junit.output.dir}"/>
+            <classpath refid="run.LoginSuite (3).classpath"/>
+            <bootclasspath>
+                <path refid="run.LoginSuite (3).bootclasspath"/>
+            </bootclasspath>
+        </junit>
+    </target>
+    <target name="MainSuite (1)">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.liepin.mishu.suite.MainSuite" todir="${junit.output.dir}"/>
+            <classpath refid="run.MainSuite (1).classpath"/>
+            <bootclasspath>
+                <path refid="run.MainSuite (1).bootclasspath"/>
+            </bootclasspath>
+        </junit>
+    </target>
+    <target name="MyTest">
+        <java classname="com.liepin.mishu.page.MyTest" failonerror="true" fork="yes">
+            <classpath refid="run.MyTest.classpath"/>
+            <bootclasspath>
+                <path refid="run.MyTest.bootclasspath"/>
+            </bootclasspath>
+        </java>
+    </target>
+    <target name="RandomControl">
+        <java classname="com.liepin.utils.RandomControl" failonerror="true" fork="yes">
+            <classpath refid="run.RandomControl.classpath"/>
+            <bootclasspath>
+                <path refid="run.RandomControl.bootclasspath"/>
+            </bootclasspath>
+        </java>
+    </target>
+    <target name="junitreport">
+        <junitreport todir="${junit.output.dir}">
+            <fileset dir="${junit.output.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.output.dir}"/>
+        </junitreport>
+    </target>
+</project>
